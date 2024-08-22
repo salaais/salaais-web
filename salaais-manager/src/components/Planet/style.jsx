@@ -18,7 +18,7 @@ const float = keyframes`
 export const Planet = styled.img`
   width: ${({ width }) => width || "450px"};
   animation: ${float} 4s cubic-bezier(0.11, -0.23, 1, 1.18) infinite,
-    ${spin} 3s
+    ${spin} 2.5s
       linear(
         0 0%,
         0 1.8%,
