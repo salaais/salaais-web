@@ -50,6 +50,37 @@ export default function User() {
   //     }
   //   ];
 
+  const userListArray = [
+    {
+      id: 1,
+      nickname: "filipe",
+      name: "Filipe Souza",
+      // email: "filipe.souza@example.com",
+      requestStatus: "request",
+      // cellphone: "(11) 98765-4321",
+      description: "Aventureiro e desenvolvedor de software.",
+    },
+    {
+      id: 2,
+      nickname: "melissa_air",
+      name: "Melissa Costa",
+      // email: "melissa.costa@example.com",
+      requestStatus: "friends",
+      // cellphone: "(21) 91234-5678",
+      description: "Apaixonada por viagens e natureza.",
+    },
+    {
+      id: 3,
+      nickname: "brun0_3",
+      name: "Bruno Silva",
+      // email: "bruno.silva@example.com",
+      requestStatus: "requested",
+      // cellphone: "(31) 97654-3210",
+      description: "Fã de esportes radicais e fotografia.",
+    }
+  ];
+  
+
   return (
     <>
       <Menu isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
@@ -57,7 +88,7 @@ export default function User() {
         <TitlePage text={"Users"} />
         <StyledContentLogged>
           <SearchInput disableFilter />
-          <UserCardList list={userList} />
+          <UserCardList list={userListArray} />
         </StyledContentLogged>
       </div>
     </>

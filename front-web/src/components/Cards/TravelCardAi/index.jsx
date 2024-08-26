@@ -4,7 +4,7 @@ import * as Styled from './style';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as solidHeart, faBookmark as solidBookmark, faChevronDown, faCopy, faLink, faCalendarDays, faFlag } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as regularHeart, faBookmark as regularBookmark } from '@fortawesome/free-regular-svg-icons';
-import DefaultImg from '../../../img/w2g2.png';
+import DefaultImg from '../../../img/logo-background.png';
 
 
 export function TravelCardAi({ list, type}) {
@@ -168,12 +168,12 @@ export function TravelCardAi({ list, type}) {
         <Styled.TextContent isShowMore={isShowMore}>
 
           <Styled.Flex>
-            <Styled.Bold>Data inicio:</Styled.Bold>
+            <Styled.Bold>Início:</Styled.Bold>
             <Global.Text>{list.dataInicio}</Global.Text>
           </Styled.Flex>
 
           <Styled.Flex>
-            <Styled.Bold>Data fim:</Styled.Bold>
+            <Styled.Bold>Fim:</Styled.Bold>
             <Global.Text>{list.dataFim}</Global.Text>
           </Styled.Flex>
 

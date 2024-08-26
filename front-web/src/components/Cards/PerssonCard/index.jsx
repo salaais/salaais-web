@@ -4,7 +4,7 @@ import * as Styled from './style';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserPlus as userPlus, faUserClock as userClock, faUserGroup as users, faChevronDown, faLink } from '@fortawesome/free-solid-svg-icons';
 // import { faChevronDown } from '@fortawesome/free-regular-svg-icons';
-import DefaultImg from '../../../img/w2g2.png';
+import DefaultImg from '../../../img/logo-background.png';
 
 export function PerssonCard({ list, type}) {
   const [isLink, setIsLink] = useState(false);

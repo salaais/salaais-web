@@ -1,18 +1,19 @@
-import styled, { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from "styled-components"
 
 export const GlobalStyle = createGlobalStyle`
   :root {
     --primary-color: #FFCD00;
-    --secondary-color: #FFEE92; //rgba(82, 112, 251, 0.39);
+    --secondary-color: #fff6bf; //rgba(82, 112, 251, 0.39);
     --bg-primary: #ECEFF7;
     --bg-secondary: #FFFFFF;
-    --bg-tartiary: #cfcfcf;
+    --bg-tartiary: #cfcfcf9e;
     --bg-third: #ccd0d3;
     --txt-primary: #8F8D98;
     --txt-secondary: #5a5a5aa1;
     --txt-title: #7a7a7a;
     --success-color: #28a745;
-    --danger-color: #c23846;
+    --danger-primary: #c23846;
+    --danger-secondary: #ff536437;
     --warning-color: #ffc107;
     --info-color: #17a2b8;
     --light-color: #3a99f8;
@@ -88,19 +89,19 @@ export const GlobalStyle = createGlobalStyle`
         padding: 23px 0 0 0;
     }
 }
-`;
+`
 
 export const StyledContentLogged = styled.div`
-padding: 0 20px 60px 0;
-& > *{
-  padding: 0 0 40px 0;
-}
-@media(width < 768px){
-  padding: 0 20px 20px 20px;
-  flex-direction:column;
-  justify-content:center;
-}
-`;
+  padding: 0 20px 60px 0;
+  & > * {
+    padding: 0 0 40px 0;
+  }
+  @media (width < 768px) {
+    padding: 0 20px 20px 20px;
+    flex-direction: column;
+    justify-content: center;
+  }
+`
 
 export const BackgroundCard = styled.div`
   display: flex;
@@ -114,22 +115,22 @@ export const BackgroundCard = styled.div`
   padding: 30px;
 
   /* Conditionally apply styles based on the mobile prop */
-  width: ${(props) => (props.mobile ? '100%' : 'auto')};
-  max-width: ${(props) => (props.mobile ? '400px' : '1200px')};
+  width: ${(props) => (props.mobile ? "100%" : "auto")};
+  max-width: ${(props) => (props.mobile ? "400px" : "1200px")};
 
   @media (max-width: 768px) {
-    width: ${(props) => (props.mobile ? '100%' : 'auto')};
-    max-width: ${(props) => (props.mobile ? '400px' : 'none')};
+    width: ${(props) => (props.mobile ? "100%" : "auto")};
+    max-width: ${(props) => (props.mobile ? "400px" : "none")};
   }
-`;
+`
 
 export const Gap = styled.div`
-  display:flex;
-  flex-wrap:wrap;
+  display: flex;
+  flex-wrap: wrap;
   // padding: 50px 0 0 0;
-  gap:20px;
-  justify-content:center;
-  @media(width > 768px){
-    flex-direction:row;
+  gap: 20px;
+  justify-content: center;
+  @media (width > 768px) {
+    flex-direction: row;
   }
 `
