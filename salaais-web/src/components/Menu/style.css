@@ -57,6 +57,14 @@ li:hover {
   background-color: var(--danger-secondary);
 }
 
+.admin{
+  color: var(--admin-color);
+}
+
+.admin:hover {
+  background-color: var(--admin-secondary-color);
+}
+
 .active li {
   background-color: var(--secondary-color);
   color: var(--primary-color);

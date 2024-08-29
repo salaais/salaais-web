@@ -6,7 +6,7 @@ import {
   TravelCardAiList,
 } from "../../components/index"
 import { StyledContentLogged } from "../../style"
-import api from "../../services/javaApi"
+import api from "../../services/apiSalaAis"
 import { getCookie } from "../../utils/utils"
 
 export default function Home() {

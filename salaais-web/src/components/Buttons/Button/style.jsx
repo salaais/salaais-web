@@ -43,7 +43,7 @@ export const Button = styled.button`
 
   &:disabled {
     cursor: not-allowed;
-    opacity: 0.3;
+    opacity: 0.7;
   }
 `;
 
@@ -59,7 +59,7 @@ const spinAnimation = keyframes`
 export const LoadingIcon = styled(FontAwesomeIcon)`
   cursor: pointer;
   font-size: 16px;
-  color: var(--txt-solid);
+  color: ${(props) => (props.solid ? 'var(--bg-secondary)' : 'var(--primary-color)')};
   animation: ${spinAnimation} 2s linear infinite; // Aplica a animação "spin" ao ícone
 `;
 

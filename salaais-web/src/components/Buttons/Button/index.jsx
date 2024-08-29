@@ -28,7 +28,7 @@ export function Button({ background, text, borderColor, size, solid = false, onC
         {isLoading ? 
         <>
           <Styled.ContentIcon>
-            <Styled.LoadingIcon icon={faSpinner} />
+            <Styled.LoadingIcon solid={solid} icon={faSpinner} />
           </Styled.ContentIcon>
         </>
        : text}

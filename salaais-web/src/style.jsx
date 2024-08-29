@@ -15,6 +15,8 @@ export const GlobalStyle = createGlobalStyle`
     --danger-primary: #c23846;
     --danger-secondary: #ff536437;
     --warning-color: #ffc107;
+    --admin-color: #3a99f8;
+    --admin-secondary-color: #3a99f868;
     --info-color: #17a2b8;
     --light-color: #3a99f8;
     --dark-color: #343a40;

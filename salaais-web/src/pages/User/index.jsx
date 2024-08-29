@@ -8,7 +8,7 @@ import {
 // import * as Styled from './style.jsx'
 import { StyledContentLogged } from "../../style"
 import { getCookie } from "../../utils/utils"
-import api from "../../services/javaApi"
+import api from "../../services/apiSalaAis"
 
 export default function User() {
   const [isOpen, setIsOpen] = useState(false)
@@ -77,9 +77,8 @@ export default function User() {
       requestStatus: "requested",
       // cellphone: "(31) 97654-3210",
       description: "Fã de esportes radicais e fotografia.",
-    }
-  ];
-  
+    },
+  ]
 
   return (
     <>

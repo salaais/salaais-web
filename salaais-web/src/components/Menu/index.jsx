@@ -15,6 +15,7 @@ import {
   faUserGroup,
   faCalendarDays,
   faMedal,
+  faShield,
 } from "@fortawesome/free-solid-svg-icons" //faChevronCircleRight
 import "./style.css"
 
@@ -36,12 +37,21 @@ export function Menu(props) {
             id={props.isOpen ? "iMenuOpen" : "iMenuClose"}
           />
         </li>
+
+        <NavLink to={"/admin"}>
+          <li class="admin">
+            <FontAwesomeIcon className="icon" icon={faShield} />
+            <a>Admin</a>
+          </li>
+        </NavLink>
+
         <NavLink to={"/Profile"}>
           <li>
             <FontAwesomeIcon className="icon" icon={faUserAlt} />
             <a>Perfil</a>
           </li>
         </NavLink>
+
 
         <NavLink to={"/"}>
           <li>

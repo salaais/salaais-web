@@ -9,6 +9,7 @@ import Settings from "./pages/Settings/index"
 import SignUp from "./pages/Access/SignUp"
 import SignIn from "./pages/Access/SignIn"
 import User from "./pages/User"
+import Admin from "./pages/Admin"
 
 // cnd fontweasome
 export default function App() {
@@ -21,6 +22,7 @@ export default function App() {
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
           {/* logged */}
+          <Route path="/admin" element={<Admin />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/" element={<Home />} />
           <Route path="/Users" element={<User />} />

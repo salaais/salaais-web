@@ -4,7 +4,7 @@ import { Input, Button, TitleCard } from "../index"
 import Logo from "../../img/logo-amarelo.png"
 import * as Styled from "./style"
 import { BackgroundCard } from "../../style"
-import api from "../../services/javaApi"
+import api from "../../services/apiSalaAis"
 import { setCookie } from "../../utils/utils"
 
 export function FormSignIn() {
