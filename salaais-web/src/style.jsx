@@ -7,7 +7,6 @@ export const GlobalStyle = createGlobalStyle`
     --bg-primary: #ECEFF7;
     --bg-secondary: #FFFFFF;
     --bg-tartiary: #cfcfcf9e;
-    --bg-third: #ccd0d3;
     --txt-primary: #8F8D98;
     --txt-secondary: #5a5a5aa1;
     --txt-title: #7a7a7a;
@@ -21,6 +20,9 @@ export const GlobalStyle = createGlobalStyle`
     --light-color: #3a99f8;
     --dark-color: #343a40;
     --button-txt: #fff;
+
+    --bg-primary-table-color: #ccd0d3;
+    --bg-secondary-table-color: #ccd0d3;
 
     --msg-send: #353342;
     --txt-solid: #c3c6e0;

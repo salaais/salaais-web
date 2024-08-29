@@ -1,8 +1,73 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { StyledContentLogged, Gap, BackgroundCard } from "../../style";
 import { Menu, Input, Button, TitlePage, Text } from "../../components/index";
 import apiSalaAis from "../../services/apiSalaAis";
 import { getCookie } from "../../utils/utils";
+import * as Styled from './style';
+
+const ErrorTable = ({ error }) => {
+  if (!error) return null;
+
+  const errorData = {
+    message: error.message || "No message",
+    status: error.response?.status || "No status",
+    statusText: error.response?.statusText || "No status text",
+    data: error.response?.data || "No data",
+  };
+
+  return (
+    <Styled.ScrollX>
+      <Styled.Table>
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          {Object.entries(errorData).map(([key, value]) => (
+            <tr key={key}>
+              <td>{key}</td>
+              <td>{JSON.stringify(value, null, 2)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </Styled.Table>
+    </Styled.ScrollX>
+  );
+};
+
+const SuccessTable = ({ responseDetails }) => {
+  if (!responseDetails) return null;
+
+  const successData = {
+    "Número adicionadas": responseDetails.numero_adicionadas,
+    "Número alteradas": responseDetails.numero_alteradas,
+    "Questões adicionadas": responseDetails.questoes_adicionadas.join(", "),
+    "Questões alteradas": responseDetails.questoes_alteradas.join(", "),
+  };
+
+  return (
+    <Styled.ScrollX>
+      <Styled.Table>
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          {Object.entries(successData).map(([key, value]) => (
+            <tr key={key}>
+              <td>{key}</td>
+              <td>{value}</td>
+            </tr>
+          ))}
+        </tbody>
+      </Styled.Table>
+    </Styled.ScrollX>
+  );
+};
 
 export default function Admin() {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,39 +76,42 @@ export default function Admin() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
-  const [responseDetails, setResponseDetails] = useState(null)
+  const [responseDetails, setResponseDetails] = useState(null);
 
-  const registerQuestions = async () => {
+  const registerQuestions = useCallback(async () => {
     setLoading(true);
     setError(null);
     setSuccess(false);
-    setResponseDetails(null)
+    setResponseDetails(null);
+
     const authToken = getCookie("authToken");
 
     try {
-
       const response = await apiSalaAis.post(
         "/questao/tsv",
-        { tsv_values: `${tsvValuesTitle}\n${tsvValuesData}`.replace(/\t/g, '\t').replace(/\n/g, '\n')}, // Enviar o valor formatado
+        {
+          tsv_values: `${tsvValuesTitle}\n${tsvValuesData}`
+            .replace(/\t/g, "\t")
+            .replace(/\n/g, "\n"),
+        },
         {
           headers: {
-            Authorization: `Bearer ${authToken}`, // Passando o token no header Authorization
+            Authorization: `Bearer ${authToken}`,
           },
         }
       );
 
-      // Handle success
       setSuccess(true);
-      setResponseDetails(response.data)
+      setResponseDetails(response.data);
       console.log("Successfully registered questions:", response.data);
     } catch (error) {
-      // Handle error
-      setError(error.response?.data?.message || "An error occurred");
+      console.table(error);
+      setError(error);
       console.error("Failed to register questions:", error);
     } finally {
       setLoading(false);
     }
-  };
+  }, [tsvValuesTitle, tsvValuesData]);
 
   return (
     <>
@@ -60,7 +128,7 @@ export default function Admin() {
               onChange={(e) => setTsvValuesTitle(e.target.value)}
             />
             <Input
-              type={'textarea'}
+              type={"textarea"}
               text={"Data"}
               value={tsvValuesData}
               onChange={(e) => setTsvValuesData(e.target.value)}
@@ -72,20 +140,17 @@ export default function Admin() {
                 text={loading ? "Salvando..." : "Salvar"}
                 solid
                 onClick={registerQuestions}
-                disabled={loading} // Disable button while loading
+                disabled={loading}
               />
             </Gap>
 
             {success && responseDetails && (
               <div>
                 <Text text={"Questões cadastradas com sucesso!"} />
-                <Text text={`Número adicionadas: ${responseDetails.numero_adicionadas}`} />
-                <Text text={`Número alteradas: ${responseDetails.numero_alteradas}`} />
-                <Text text={`Questões adicionadas: ${responseDetails.questoes_adicionadas.join(", ")}`} />
-                <Text text={`Questões alteradas: ${responseDetails.questoes_alteradas.join(", ")}`} />
+                <SuccessTable responseDetails={responseDetails} />
               </div>
             )}
-            {error && <Text text={`Erro: ${error}`} />}
+            {error && <ErrorTable error={error} />}
           </BackgroundCard>
         </StyledContentLogged>
       </div>
