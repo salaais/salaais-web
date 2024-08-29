@@ -1,23 +1,28 @@
-import React, { useState, useCallback } from "react";
-import { StyledContentLogged, Gap, BackgroundCard } from "../../style";
-import { Menu, Input, Button, TitlePage, Text } from "../../components/index";
-import apiSalaAis from "../../services/apiSalaAis";
-import { getCookie } from "../../utils/utils";
-import * as Styled from './style';
+import React, { useState, useCallback } from "react"
+import { StyledContentLogged, Gap, BackgroundCard } from "../../style"
+import { Menu, Input, Button, TitlePage, Text } from "../../components/index"
+import apiSalaAis from "../../services/apiSalaAis"
+import { getCookie } from "../../utils/utils"
+import * as Styled from "./style"
 
 const ErrorTable = ({ error }) => {
-  if (!error) return null;
+  if (!error) return null
 
   const errorData = {
     message: error.message || "No message",
+    code: error.code || "No status",
     status: error.response?.status || "No status",
+    baseURL: error.response?.config?.baseURL || "No BaseURL",
+   "data.message": error.response?.data?.message || "data.message",
     statusText: error.response?.statusText || "No status text",
+    method: error.response?.config?.method || "no method",
     data: error.response?.data || "No data",
-  };
+  }
+  console.log(error)
 
   return (
     <Styled.ScrollX>
-      <Styled.Table>
+      <Styled.Table type={"error"}>
         <thead>
           <tr>
             <th>Field</th>
@@ -34,22 +39,22 @@ const ErrorTable = ({ error }) => {
         </tbody>
       </Styled.Table>
     </Styled.ScrollX>
-  );
-};
+  )
+}
 
 const SuccessTable = ({ responseDetails }) => {
-  if (!responseDetails) return null;
+  if (!responseDetails) return null
 
   const successData = {
     "Número adicionadas": responseDetails.numero_adicionadas,
     "Número alteradas": responseDetails.numero_alteradas,
-    "Questões adicionadas": responseDetails.questoes_adicionadas.join(", "),
-    "Questões alteradas": responseDetails.questoes_alteradas.join(", "),
-  };
+    "Questões adicionadas": responseDetails.questoes_adicionadas.join("     "),
+    "Questões alteradas": responseDetails.questoes_alteradas.join("     "),
+  }
 
   return (
     <Styled.ScrollX>
-      <Styled.Table>
+      <Styled.Table type={"success"}>
         <thead>
           <tr>
             <th>Field</th>
@@ -66,25 +71,25 @@ const SuccessTable = ({ responseDetails }) => {
         </tbody>
       </Styled.Table>
     </Styled.ScrollX>
-  );
-};
+  )
+}
 
 export default function Admin() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [tsvValuesTitle, setTsvValuesTitle] = useState("");
-  const [tsvValuesData, setTsvValuesData] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(false);
-  const [responseDetails, setResponseDetails] = useState(null);
+  const [isOpen, setIsOpen] = useState(false)
+  const [tsvValuesTitle, setTsvValuesTitle] = useState("")
+  const [tsvValuesData, setTsvValuesData] = useState("")
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
+  const [success, setSuccess] = useState(false)
+  const [responseDetails, setResponseDetails] = useState(null)
 
   const registerQuestions = useCallback(async () => {
-    setLoading(true);
-    setError(null);
-    setSuccess(false);
-    setResponseDetails(null);
+    setLoading(true)
+    setError(null)
+    setSuccess(false)
+    setResponseDetails(null)
 
-    const authToken = getCookie("authToken");
+    const authToken = getCookie("authToken")
 
     try {
       const response = await apiSalaAis.post(
@@ -99,19 +104,18 @@ export default function Admin() {
             Authorization: `Bearer ${authToken}`,
           },
         }
-      );
+      )
 
-      setSuccess(true);
-      setResponseDetails(response.data);
-      console.log("Successfully registered questions:", response.data);
+      setSuccess(true)
+      setResponseDetails(response.data)
+      console.log("Successfully registered questions:", response.data)
     } catch (error) {
-      console.table(error);
-      setError(error);
-      console.error("Failed to register questions:", error);
+      setError(error)
+      console.error("Failed to register questions:", error)
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  }, [tsvValuesTitle, tsvValuesData]);
+  }, [tsvValuesTitle, tsvValuesData])
 
   return (
     <>
@@ -146,14 +150,19 @@ export default function Admin() {
 
             {success && responseDetails && (
               <div>
-                <Text text={"Questões cadastradas com sucesso!"} />
+                <Text text={"🎉Sucesso!"} />
                 <SuccessTable responseDetails={responseDetails} />
               </div>
             )}
-            {error && <ErrorTable error={error} />}
+            {error && (
+              <div>
+                <Text text={"☹️Erro"} />
+                <ErrorTable error={error} />
+              </div>
+            )}
           </BackgroundCard>
         </StyledContentLogged>
       </div>
     </>
-  );
+  )
 }
