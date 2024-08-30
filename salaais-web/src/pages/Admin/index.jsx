@@ -93,7 +93,7 @@ export default function Admin() {
 
     try {
       const response = await apiSalaAis.post(
-        "/questao/tsv",
+        "/questao/cadastro/tsv",
         {
           tsv_values: `${tsvValuesTitle}\n${tsvValuesData}`
             .replace(/\t/g, "\t")
