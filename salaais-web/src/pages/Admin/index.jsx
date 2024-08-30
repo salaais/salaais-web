@@ -13,7 +13,7 @@ const ErrorTable = ({ error }) => {
     code: error.code || "No status",
     status: error.response?.status || "No status",
     baseURL: error.response?.config?.baseURL || "No BaseURL",
-   "data.message": error.response?.data?.message || "data.message",
+    "data.message": error.response?.data?.message || "data.message",
     statusText: error.response?.statusText || "No status text",
     method: error.response?.config?.method || "no method",
     data: error.response?.data || "No data",
@@ -48,8 +48,8 @@ const SuccessTable = ({ responseDetails }) => {
   const successData = {
     "Número adicionadas": responseDetails.numero_adicionadas,
     "Número alteradas": responseDetails.numero_alteradas,
-    "Questões adicionadas": responseDetails.questoes_adicionadas.join("     "),
-    "Questões alteradas": responseDetails.questoes_alteradas.join("     "),
+    "Questões adicionadas": responseDetails.questoes_adicionadas.join(", "),
+    "Questões alteradas": responseDetails.questoes_alteradas.join(", "),
   }
 
   return (
