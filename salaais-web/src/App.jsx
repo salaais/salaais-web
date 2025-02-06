@@ -10,6 +10,7 @@ import SignUp from "./pages/Access/SignUp"
 import SignIn from "./pages/Access/SignIn"
 import User from "./pages/User"
 import Admin from "./pages/Admin"
+import PoliticasDePrivacidade from "./pages/PoliticasDePrivacidade"
 
 // cnd fontweasome
 export default function App() {
@@ -28,6 +29,7 @@ export default function App() {
           <Route path="/Users" element={<User />} />
           <Route path="/notifications" element={<Notifications />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/politicas-de-privacidade" element={<PoliticasDePrivacidade />} />
         </Routes>
       </Router>
     </>
