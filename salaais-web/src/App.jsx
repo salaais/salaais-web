@@ -1,16 +1,17 @@
-import React from "react"
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
-import { GlobalStyle } from "./style"
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { GlobalStyle } from "./style";
 
-import Home from "./pages/Home/index"
-import Profile from "./pages/Profile/index"
-import Notifications from "./pages/Notifications/index"
-import Settings from "./pages/Settings/index"
-import SignUp from "./pages/Access/SignUp"
-import SignIn from "./pages/Access/SignIn"
-import User from "./pages/User"
-import Admin from "./pages/Admin"
-import PoliticasDePrivacidade from "./pages/PoliticasDePrivacidade"
+import Home from "./pages/Home/index";
+import Profile from "./pages/Profile/index";
+import Notifications from "./pages/Notifications/index";
+import Settings from "./pages/Settings/index";
+import SignUp from "./pages/Access/SignUp";
+import SignIn from "./pages/Access/SignIn";
+import User from "./pages/User";
+import Admin from "./pages/Admin";
+import PoliticasDePrivacidade from "./pages/PoliticasDePrivacidade";
+import Plans from "./pages/Plans";
 
 // cnd fontweasome
 export default function App() {
@@ -29,9 +30,13 @@ export default function App() {
           <Route path="/Users" element={<User />} />
           <Route path="/notifications" element={<Notifications />} />
           <Route path="/settings" element={<Settings />} />
-          <Route path="/politicas-de-privacidade" element={<PoliticasDePrivacidade />} />
+          <Route
+            path="/politicas-de-privacidade"
+            element={<PoliticasDePrivacidade />}
+          />
+          <Route path="/plans" element={<Plans />} />
         </Routes>
       </Router>
     </>
-  )
+  );
 }
