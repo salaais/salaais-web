@@ -6,16 +6,19 @@ import { faMoneyBill, faTrophy } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { paymentPlan } from "../../services/apiSalaAis";
 import * as Styled from "./style";
+import { useEffect } from "react";
+import { getCookie } from "../../utils/Cookie/cookie";
 
 export default function Plans() {
   const [isOpen, setIsOpen] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const [tokenUserMobile, setTokenUserMobile] = useState(null);
 
   const payment = async (plan) => {
     try {
       const urlParams = new URLSearchParams(window.location.search);
-      const accessToken = urlParams.get("token") || "123";
+      const accessToken = tokenUserMobile || "";
       await paymentPlan(accessToken, plan);
       setSuccess("Redirecionado para o pagamento.");
       setTimeout(() => setSuccess(null), 8000);
@@ -24,6 +27,15 @@ export default function Plans() {
       setTimeout(() => setError(null), 8000);
     }
   };
+
+
+  useEffect(() => {
+    const tokenFromCookie = getCookie('token-user-mobile');
+    if (tokenFromCookie) {
+      setTokenUserMobile(tokenFromCookie);
+      console.log('Token recuperado:', tokenFromCookie);
+    }
+  }, []);
 
   const dataPlans = [
     {

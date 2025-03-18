@@ -9,7 +9,7 @@ export function Button({
   borderColor,
   size,
   solid = false,
-  onClick,
+  onClick=()=>{},
   style,
   icon,
 }) {
