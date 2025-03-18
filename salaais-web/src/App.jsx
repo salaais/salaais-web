@@ -29,12 +29,12 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/Users" element={<User />} />
           <Route path="/notifications" element={<Notifications />} />
-          <Route path="/settings" element={<Settings />} />
+          <Route path="/settings-user" element={<Settings />} />
           <Route
             path="/politicas-de-privacidade"
             element={<PoliticasDePrivacidade />}
           />
-          <Route path="/plans" element={<Plans />} />
+          <Route path="/settings" element={<Plans />} />
         </Routes>
       </Router>
     </>

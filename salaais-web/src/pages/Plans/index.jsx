@@ -16,15 +16,8 @@ export default function Plans() {
     try {
       const urlParams = new URLSearchParams(window.location.search);
       const accessToken = urlParams.get("token") || "123";
-      const response = await paymentPlan(accessToken, plan);
-      
-      if (response.url) {
-        window.open(response.url, "_blank");
-        setSuccess("Redirecionado para o pagamento.");
-      } else {
-        throw new Error("URL de pagamento não encontrada");
-      }
-      
+      await paymentPlan(accessToken, plan);
+      setSuccess("Redirecionado para o pagamento.");
       setTimeout(() => setSuccess(null), 8000);
     } catch (err) {
       setError("Erro ao processar o pagamento. Faça login no app e tente novamente.");
@@ -77,7 +70,7 @@ export default function Plans() {
                   <h2>{plan.plan}</h2>
                 </Row>
                 <p>{plan.description}</p>
-                <div>
+                <Styled.AlignButton>
                   <Button
                     text={`R$${plan.price} - Contratar`}
                     solid
@@ -90,7 +83,7 @@ export default function Plans() {
                   />
                   {error && <Styled.ErrorText>{error}</Styled.ErrorText>}
                   {success && <Styled.SuccessText>{success}</Styled.SuccessText>}
-                </div>
+                </Styled.AlignButton>
               </BackgroundCard>
             ))}
           </Grid>
