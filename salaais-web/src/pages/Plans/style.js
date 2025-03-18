@@ -18,3 +18,19 @@ export const Row = styled.div`
   justify-content: center;
   gap: 16px;
 `;
+
+export const ErrorText = styled.p`
+  margin-top: 5px;
+  text-align:center;
+  opacity:0.6;
+  font-weight:bold;
+  color:var(--danger-primary);
+`;
+
+export const SuccessText = styled.p`
+  margin-top: 5px;
+  text-align:center;
+  opacity:0.6;
+  font-weight:bold;
+  color:var(--success-color);
+`;

@@ -5,14 +5,23 @@ import { Grid, Row } from "./style";
 import { faMoneyBill, faTrophy } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { paymentPlan } from "../../services/apiSalaAis";
+import * as Styled from "./style";
 
 export default function Plans() {
   const [isOpen, setIsOpen] = useState(false);
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
 
-  //type 'BRONZE' | 'PRATA' | 'OURO' | 'PREMIUM'
   const payment = async (plan) => {
-    const accessToken = "123";
-    const {} = await paymentPlan(accessToken ?? "", plan);
+    try {
+      const accessToken = "123";
+      await paymentPlan(accessToken ?? "", plan);
+      setSuccess("Redirecionado para o pagamento.");
+      setTimeout(() => setSuccess(null), 8000);
+    } catch (err) {
+      setError("Erro ao processar o pagamento. Faça login no app e tente novamente.");
+      setTimeout(() => setError(null), 8000);
+    }
   };
 
   const dataPlans = [
@@ -60,16 +69,20 @@ export default function Plans() {
                   <h2>{plan.plan}</h2>
                 </Row>
                 <p>{plan.description}</p>
-                <Button
-                  text={` R$${plan.price} - Contratar`}
-                  solid
-                  style={{
-                    justifyContent: "center",
-                    width: "100%",
-                  }}
-                  icon={faMoneyBill}
-                  onClick={() => payment(String(plan.plan).toUpperCase())}
-                />
+                <div>
+                  <Button
+                    text={`R$${plan.price} - Contratar`}
+                    solid
+                    style={{
+                      justifyContent: "center",
+                      width: "100%",
+                    }}
+                    icon={faMoneyBill}
+                    onClick={() => payment(String(plan.plan).toUpperCase())}
+                  />
+                  {error && <Styled.ErrorText>{error}</Styled.ErrorText>}
+                  {success && <Styled.SuccessText>{success}</Styled.SuccessText>}
+                </div>
               </BackgroundCard>
             ))}
           </Grid>
