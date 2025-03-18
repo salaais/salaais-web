@@ -34,3 +34,9 @@ export const SuccessText = styled.p`
   font-weight:bold;
   color:var(--success-color);
 `;
+
+export const AlignButton = styled.p`
+display: flex;
+justify-content:center;
+flex-direction:column;
+`;

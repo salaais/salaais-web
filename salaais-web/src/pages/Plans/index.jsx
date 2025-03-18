@@ -14,8 +14,9 @@ export default function Plans() {
 
   const payment = async (plan) => {
     try {
-      const accessToken = "123";
-      await paymentPlan(accessToken ?? "", plan);
+      const urlParams = new URLSearchParams(window.location.search);
+      const accessToken = urlParams.get("token") || "123";
+      await paymentPlan(accessToken, plan);
       setSuccess("Redirecionado para o pagamento.");
       setTimeout(() => setSuccess(null), 8000);
     } catch (err) {
@@ -69,7 +70,7 @@ export default function Plans() {
                   <h2>{plan.plan}</h2>
                 </Row>
                 <p>{plan.description}</p>
-                <div>
+                <Styled.AlignButton>
                   <Button
                     text={`R$${plan.price} - Contratar`}
                     solid
@@ -82,7 +83,7 @@ export default function Plans() {
                   />
                   {error && <Styled.ErrorText>{error}</Styled.ErrorText>}
                   {success && <Styled.SuccessText>{success}</Styled.SuccessText>}
-                </div>
+                </Styled.AlignButton>
               </BackgroundCard>
             ))}
           </Grid>
