@@ -36,7 +36,7 @@ export function Button({
         disabled={isLoading}
         style={style}
       >
-        <FontAwesomeIcon icon={icon} />
+        <FontAwesomeIcon icon={icon} style={{ marginRight: "10px" }}/>
         {isLoading ? (
           <>
             <Styled.ContentIcon>

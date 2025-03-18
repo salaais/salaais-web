@@ -19,6 +19,7 @@ export const Content = styled.button`
 
 export const Button = styled.button`
   cursor: pointer;
+  align-items:center;
   border-radius: 8px;
   font-weight: bold;
   color:${(props) => (props.solid ? 'var(--bg-secondary)' : 'var(--primary-color)')};
@@ -69,4 +70,5 @@ export const ContentIcon = styled.div`
   align-items: center;
   justify-content: center;
   display: flex;
+  margin-right:20px;
 `;
