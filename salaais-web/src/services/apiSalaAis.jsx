@@ -7,6 +7,8 @@ export const apiSalaAis = axios.create({
   },
 });
 
+export default apiSalaAis;
+
 export const paymentPlan = async (accessToken, productKey) => {
   try {
     const { data } = await apiSalaAis.get(
@@ -23,5 +25,3 @@ export const paymentPlan = async (accessToken, productKey) => {
     throw new Error("Erro ao criar pagamento");
   }
 };
-
-export default apiSalaAis;
