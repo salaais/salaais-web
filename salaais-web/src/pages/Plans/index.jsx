@@ -17,23 +17,30 @@ export default function Plans() {
 
   const payment = async (plan) => {
     try {
-      const urlParams = new URLSearchParams(window.location.search);
       const accessToken = tokenUserMobile || "";
-      await paymentPlan(accessToken, plan);
-      setSuccess("Redirecionado para o pagamento.");
+      const response = await paymentPlan(accessToken, plan);
+      
+      if (response && response?.url) {
+        setSuccess("Redirecionado para o pagamento.");
+        // Abre a URL do pagamento em uma nova aba
+        window.open(response.url, "_blank");
+      } else {
+        throw new Error("A URL de pagamento não foi retornada.");
+      }
+  
       setTimeout(() => setSuccess(null), 8000);
     } catch (err) {
       setError("Erro ao processar o pagamento. Faça login no app e tente novamente.");
       setTimeout(() => setError(null), 8000);
     }
   };
+  
 
 
   useEffect(() => {
     const tokenFromCookie = getCookie('token-user-mobile');
     if (tokenFromCookie) {
       setTokenUserMobile(tokenFromCookie);
-      console.log('Token recuperado:', tokenFromCookie);
     }
   }, []);
 
