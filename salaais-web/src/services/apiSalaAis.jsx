@@ -7,15 +7,21 @@ export const apiSalaAis = axios.create({
   },
 });
 
-export default apiSalaAis;
-
-export const paymentPlan = (accessToken, productKey) => {
-  return axios.get(`${process.env.REACT_APP_SALA_AIS_API}stripe/pagamento-web/${productKey}`, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      "Content-Type": "application/json",
-    },
-  });
+export const paymentPlan = async (accessToken, productKey) => {
+  try {
+    const { data } = await apiSalaAis.get(
+      `stripe/pagamento-web/${productKey}`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      },
+    );
+    return data;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Erro ao criar pagamento");
+  }
 };
 
-
+export default apiSalaAis;
