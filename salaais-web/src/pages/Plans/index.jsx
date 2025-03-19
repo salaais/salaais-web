@@ -21,9 +21,27 @@ export default function Plans() {
       const response = await paymentPlan(accessToken, plan);
       
       if (response && response?.url) {
-        setSuccess("Redirecionado para o pagamento.");
-        // Abre a URL do pagamento em uma nova aba
-        window.open(response.url, "_blank");
+        setSuccess(
+          <>
+            Redirecionado para o pagamento. Caso não tenha aberto o link de pagamento,{" "}
+            <a
+              href={response.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ textDecoration: 'underline' }}
+            >
+              Clique Aqui
+            </a>
+
+          </>
+        );
+  
+        // Tenta abrir a URL do pagamento em uma nova aba
+        const newWindow = window.open(response.url, "_blank");
+        
+        if (!newWindow) {
+          throw new Error("A nova aba foi bloqueada.");
+        }
       } else {
         throw new Error("A URL de pagamento não foi retornada.");
       }
@@ -35,7 +53,6 @@ export default function Plans() {
     }
   };
   
-
 
   useEffect(() => {
     const tokenFromCookie = getCookie('token-user-mobile');
