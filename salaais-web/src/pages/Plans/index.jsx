@@ -65,28 +65,28 @@ export default function Plans() {
     {
       color: "#FF5722",
       plan: "Premium",
-      price: "93,90",
+      price: "89,90",
       description:
         "Acesso aos simulados da ANAC, simulados de estudos dividos por blocos e matérias durante 120 dias",
     },
     {
       color: "#FFD700",
       plan: "Ouro",
-      price: "73,90",
+      price: "69,90",
       description:
         "Acesso aos simulados da ANAC, simulados de estudos dividos por blocos e matérias durante 90 dias",
     },
     {
       color: "#999B9B",
       plan: "Prata",
-      price: "53,90",
+      price: "49,90",
       description:
         "Acesso aos simulados da ANAC, simulados de estudos dividos por blocos e matérias durante 60 dias",
     },
     {
       color: "#CD7F32",
       plan: "Bronze",
-      price: "35,50",
+      price: "29,90",
       description:
         "Acesso aos simulados da ANAC, simulados de estudos dividos por blocos e matérias durante 30 dias",
     },
@@ -115,7 +115,7 @@ export default function Plans() {
                       width: "100%",
                     }}
                     icon={faMoneyBill}
-                    onClick={() => payment(String(plan.plan).toUpperCase())}
+                    onClick={() => payment(String(plan.plan).toUpperCase(),"_2")}
                   />
                   {error && <Styled.ErrorText>{error}</Styled.ErrorText>}
                   {success && <Styled.SuccessText>{success}</Styled.SuccessText>}
