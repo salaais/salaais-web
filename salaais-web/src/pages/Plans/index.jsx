@@ -115,7 +115,7 @@ export default function Plans() {
                       width: "100%",
                     }}
                     icon={faMoneyBill}
-                    onClick={() => payment(String(plan.plan).toUpperCase(),"_2")}
+                    onClick={() => payment(String(plan.plan).toUpperCase()+"_2")}
                   />
                   {error && <Styled.ErrorText>{error}</Styled.ErrorText>}
                   {success && <Styled.SuccessText>{success}</Styled.SuccessText>}
