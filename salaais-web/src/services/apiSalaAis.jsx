@@ -9,15 +9,15 @@ export const apiSalaAis = axios.create({
 
 export default apiSalaAis;
 
-export const paymentPlan = async (accessToken, productKey) => {
+export const paymentPlan = async (accessToken, priceId) => {
   try {
     const { data } = await apiSalaAis.get(
-      `stripe/pagamento-web/${productKey}`,
+      `stripe/pagamento-web?price_id=${encodeURIComponent(priceId)}`,
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
-      },
+      }
     );
     return data;
   } catch (error) {
