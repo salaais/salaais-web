@@ -16,23 +16,79 @@ export default function Plans() {
   const [tokenUserMobile, setTokenUserMobile] = useState(null);
   const [plansList, setPlansList] = useState([]);
 
-  const getAllPlans = async () => {
-    try {
-      const response = await api.get("/stripe/produtos-dados-publicos");
-      console.log("Resposta completa da API:", response);
-      console.log("response.data:", response.data);
-      setPlansList(Array.isArray(response.data) ? response.data : []);
-    } catch (error) {
-      console.error("Error making the API request:", error);
-      setPlansList([]);
-    }
+  const planColors = {
+    BRONZE: "#CD7F32",
+    PRATA: "#999B9B",
+    OURO: "#FFD700",
+    PREMIUM: "#FF5722",
   };
 
+  const planType = {
+    BRONZE: "BRONZE",
+    PRATA: "PRATA",
+    OURO: "OURO",
+    PREMIUM: "PREMIUM",
+  };
 
-  const payment = async (priceId) => {
+  const AllPlans = [
+    {
+      "ativo": true,
+      "descricao": "Acesso aos simulados da ANAC e simulados de estudos divididos por blocos e matérias durante 30 dias corridos.",
+      "link_imagens": [],
+      "nome": "BRONZE",
+      "permission_key": planType.BRONZE,
+      "price": 2590,
+      "currency": "brl",
+      "key": "BRONZE_4907",
+      "duracao_plano_em_dias": 30,
+      // "price_id": "price_1QED0wFV7hxmxPWqxAM5DveM", testmode stripe
+      "price_id": "price_1RWJlgFV7hxmxPWqNSnz9Q8T",
+    },
+    {
+      "ativo": true,
+      "descricao": "Acesso aos simulados da ANAC e simulados de estudos divididos por blocos e matérias durante 90 dias corridos.",
+      "link_imagens": [],
+      "nome": "PRATA",
+      "permission_key": planType.PRATA,
+      "price": 4990,
+      "currency": "brl",
+      "key": "OURO_1903",
+      "duracao_plano_em_dias": 90,
+      // "price_id": "price_1QEDFJFV7hxmxPWqDCD1UYDU", testmode stripe
+      "price_id": "price_1RUDCQFV7hxmxPWqp4DNxbS9",
+    },
+    {
+      "ativo": true,
+      "descricao": "Acesso aos simulados da ANAC e simulados de estudos divididos por blocos e matérias durante 90 dias corridos.",
+      "link_imagens": [],
+      "nome": "OURO",
+      "permission_key": planType.OURO,
+      "price": 5990,
+      "currency": "brl",
+      "key": "OURO_1903",
+      "duracao_plano_em_dias": 90,
+      // "price_id": "price_1QEDGdFV7hxmxPWqcxyw7CEr", testmode stripe
+      "price_id": "price_1RWJowFV7hxmxPWqEJgcD44v",
+    },
+    {
+      "ativo": true,
+      "descricao": "Acesso aos simulados da ANAC e simulados de estudos divididos por blocos e matérias durante 120 dias corridos.",
+      "link_imagens": [],
+      "nome": "PREMIUM",
+      "permission_key": planType.PREMIUM,
+      "price": 7690,
+      "currency": "brl",
+      "key": "PREMIUM_9095",
+      "duracao_plano_em_dias": 120,
+      // "price_id": "price_1QEDIFFV7hxmxPWqqc7z6umF", testmode stripe
+      "price_id": "price_1RWKTZFV7hxmxPWqVy7c8tNV",
+    }
+  ]
+
+  const payment = async (priceId, permissionKey) => {
     try {
       const accessToken = tokenUserMobile || "";
-      const response = await paymentPlan(accessToken, priceId);
+      const response = await paymentPlan(accessToken, priceId, permissionKey);
 
       if (response && response.url) {
         setSuccess(
@@ -69,15 +125,8 @@ export default function Plans() {
     if (tokenFromCookie) {
       setTokenUserMobile(tokenFromCookie);
     }
-    getAllPlans();
+    setPlansList(AllPlans);
   }, []);
-
-  const planColors = {
-    BRONZE: "#CD7F32",
-    PRATA: "#999B9B",
-    OURO: "#FFD700",
-    PREMIUM: "#FF5722",
-  };
 
   return (
     <>
@@ -87,7 +136,7 @@ export default function Plans() {
         <StyledContentLogged>
           <Grid>
             {plansList.length === 0 ? (
-              <p  style={{ display:"flex", justifyContent:"center" }}>Carregando planos...</p>
+              <p style={{ display: "flex", justifyContent: "center" }}>Carregando planos...</p>
             ) : (
               plansList.map((plan) => (
                 <BackgroundCard key={plan.key}>
@@ -102,7 +151,7 @@ export default function Plans() {
                       solid
                       style={{ justifyContent: "center", width: "100%" }}
                       icon={faMoneyBill}
-                      onClick={() => payment(plan.price_id)}
+                      onClick={() => payment(plan.price_id, plan.permission_key)}
                     />
                     {error && <Styled.ErrorText>{error}</Styled.ErrorText>}
                     {success && <Styled.SuccessText>{success}</Styled.SuccessText>}

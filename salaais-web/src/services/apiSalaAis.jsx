@@ -9,10 +9,10 @@ export const apiSalaAis = axios.create({
 
 export default apiSalaAis;
 
-export const paymentPlan = async (accessToken, priceId) => {
+export const paymentPlan = async (accessToken, priceId, permissionKey) => {
   try {
     const { data } = await apiSalaAis.get(
-      `stripe/pagamento-web?price_id=${encodeURIComponent(priceId)}`,
+      `stripe/pagamento-web?price_id=${encodeURIComponent(priceId)}&permission_key=${encodeURIComponent(permissionKey)}`,
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
