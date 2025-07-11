@@ -46,7 +46,7 @@ export default function Plans() {
     },
     {
       "ativo": true,
-      "descricao": "Acesso aos simulados da ANAC e simulados de estudos divididos por blocos e matérias durante 90 dias corridos.",
+      "descricao": "Acesso aos simulados da ANAC e simulados de estudos divididos por blocos e matérias durante 60 dias corridos.",
       "link_imagens": [],
       "nome": "PRATA",
       "permission_key": planType.PRATA,
